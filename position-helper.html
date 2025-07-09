@@ -6,20 +6,19 @@
   <style>
     body {
       margin: 0;
-      background: #f0f0f0;
       font-family: monospace;
-      text-align: center;
+      background: #f3f3f3;
     }
 
     .container {
       position: relative;
       width: 1000px;
+      height: 750px;
       margin: 2rem auto;
-      background-image: url("img/vangogh-room.jpg"); /* Arka plan resmini buraya koy */
+      background-image: url("img/vangogh-room.jpg");
       background-size: cover;
       background-position: center;
-      aspect-ratio: 4 / 3; /* 1000x750 gibi */
-      border: 2px solid #aaa;
+      border: 2px solid #666;
     }
 
     .draggable {
@@ -29,17 +28,16 @@
     }
 
     .info {
-      margin-top: 1rem;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1.1rem;
     }
   </style>
 </head>
 <body>
 
-  <h1>Position Helper</h1>
-  <p>Sürükle ve alt kısımdan koordinatları kopyala.</p>
-
   <div class="container" id="canvas">
-    <img src="img/pencere.gif" class="draggable" id="obj" alt="Pencere">
+    <img src="img/pencere.gif" class="draggable" id="obj" alt="Nesne">
   </div>
 
   <div class="info" id="coords">top: 0%; left: 0%;</div>
@@ -49,38 +47,39 @@
     const container = document.getElementById("canvas");
     const coords = document.getElementById("coords");
 
-    let offsetX, offsetY;
-
     obj.addEventListener("mousedown", function(e) {
       e.preventDefault();
-      offsetX = e.clientX - obj.offsetLeft;
-      offsetY = e.clientY - obj.offsetTop;
+      let shiftX = e.clientX - obj.getBoundingClientRect().left;
+      let shiftY = e.clientY - obj.getBoundingClientRect().top;
 
-      function onMouseMove(e) {
-        let x = e.clientX - offsetX;
-        let y = e.clientY - offsetY;
+      function moveAt(pageX, pageY) {
+        let x = pageX - container.getBoundingClientRect().left - shiftX;
+        let y = pageY - container.getBoundingClientRect().top - shiftY;
 
-        // container sınırları içinde tut
+        // sınırlar
         x = Math.max(0, Math.min(container.clientWidth - obj.clientWidth, x));
         y = Math.max(0, Math.min(container.clientHeight - obj.clientHeight, y));
 
         obj.style.left = x + "px";
         obj.style.top = y + "px";
 
-        // Yüzdelik değerler
+        // yüzde
         let leftPct = ((x / container.clientWidth) * 100).toFixed(1);
         let topPct = ((y / container.clientHeight) * 100).toFixed(1);
         coords.textContent = `top: ${topPct}%; left: ${leftPct}%;`;
       }
 
-      function onMouseUp() {
-        document.removeEventListener("mousemove", onMouseMove);
-        document.removeEventListener("mouseup", onMouseUp);
+      function onMouseMove(e) {
+        moveAt(e.pageX, e.pageY);
       }
 
       document.addEventListener("mousemove", onMouseMove);
-      document.addEventListener("mouseup", onMouseUp);
+      document.addEventListener("mouseup", () => {
+        document.removeEventListener("mousemove", onMouseMove);
+      }, { once: true });
     });
+
+    obj.ondragstart = () => false;
   </script>
 
 </body>
