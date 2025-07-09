@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Position Helper</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100vh;
+      background: #f5f5f5 url("img/vangogh-room.jpg") no-repeat center center;
+      background-size: contain;
+      font-family: monospace;
+    }
+
+    #object {
+      position: absolute;
+      width: 10%;
+      cursor: move;
+    }
+
+    #coords {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background: white;
+      padding: 8px;
+      font-size: 14px;
+      border-top: 1px solid #ccc;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <img id="object" src="img/pc.png" alt="object" />
+
+  <div id="coords">top: 50%; left: 50%; width: 10%;</div>
+
+  <script>
+    const object = document.getElementById("object");
+    const coords = document.getElementById("coords");
+
+    let isDragging = false;
+
+    object.addEventListener("mousedown", () => isDragging = true);
+    document.addEventListener("mouseup", () => isDragging = false);
+
+    document.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const left = (e.clientX / vw) * 100;
+      const top = (e.clientY / vh) * 100;
+
+      object.style.left = `${left}%`;
+      object.style.top = `${top}%`;
+
+      coords.textContent = `top: ${top.toFixed(1)}%; left: ${left.toFixed(1)}%; width: ${object.style.width};`;
+    });
+  </script>
+</body>
+</html>
