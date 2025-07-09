@@ -2,93 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Van Gogh Room</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      background-color: black;
-      font-family: monospace;
-    }
-
-    .room-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .background {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 100vh;
-      z-index: 0;
-    }
-
-    .hover-object {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      width: 7.5vw;
-      cursor: pointer;
-    }
-
-    .hover-object img {
-      width: 100%;
-      transition: transform 0.2s ease;
-    }
-
-    .hover-object span {
-      opacity: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 1.25vw;
-      color: white;
-      text-shadow: 0 0 4px black;
-      text-transform: uppercase;
-      pointer-events: none;
-    }
-
-    .hover-object:hover img {
-      transform: rotate(2deg) scale(1.05);
-    }
-
-    .hover-object:hover span {
-      opacity: 1;
-    }
-  </style>
+  <title>kemalhizarci</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="room-container">
-    <!-- Arka plan -->
-    <img src="img/vangogh-room.jpg" alt="Van Gogh Room" class="background" />
+  <div class="container">
+    <img src="arka.png" alt="background" class="background">
 
-    <!-- Bilgisayar -->
-    <a href="info.html" class="hover-object" style="top: 54.6%; left: 43.7%;">
-      <img src="img/pc.png" alt="PC" />
-      <span>info</span>
+    <a href="info.html" class="object" style="top: 22.2%; left: 18.3%;">
+      <img src="pc.png" alt="Info">
+      <span>Info</span>
     </a>
 
-<a href="links.html" class="object" style="top: 28.5%; left: 18.5%; width: 10%;" title="Links">
-  <img src="img/pencere.gif" alt="window">
-  <span>Links</span>
-</a>
+    <a href="contact.html" class="object" style="top: 0%; left: 24.6%;">
+      <img src="pencere.png" alt="Contact">
+      <span>Contact</span>
+    </a>
 
+    <a href="notes.html" class="object" style="top: 35%; left: 65%;">
+      <img src="sanat.png" alt="Notes">
+      <span>Notes</span>
+    </a>
 
-    <!-- Diğer nesneler buraya aynı yapı ile eklenebilir -->
+    <a href="projects.html" class="object" style="top: 40%; left: 10%;">
+      <img src="mobilya.png" alt="Projects">
+      <span>Projects</span>
+    </a>
+
+    <a href="sketchbook.html" class="object" style="top: 60%; left: 45%;">
+      <img src="resim.png" alt="Sketchbook">
+      <span>Sketchbook</span>
+    </a>
   </div>
 </body>
 </html>
