@@ -1,68 +1,34 @@
-
 body {
-  min-height: calc(100vh - 10px);
-  overflow-x: hidden;
-  background-color: whitesmoke;
-}
-.room {
-  width: 100%;
-  height: 300px;
-  position: relative;
-  transform: scale(0.70) translateY(-25%);
-}
-span {
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: calc(1em + 1.75vw);
-  color: #FFF;
-  line-height: 1;
-  filter: drop-shadow(1px 1px 0 black)
-          drop-shadow(-1px 1px 0 black) 
-          drop-shadow(1px -1px 0 black) 
-          drop-shadow(-1px -1px 0 black);
-  text-transform: uppercase;
-  z-index: 99;
-}
-.rotate {
-  width: fit-content;
-  height: fit-content;
-  display: inline-block;
-  position: absolute;
-}
-.rotate:hover img, .rotate:focus img {
-  transform: rotate(3deg);
-}
-.rotate:hover span, a:focus span {
-  opacity: 1;
-}
-header {
-  width: fit-content;
-  padding: 10px;
-  margin: 10px auto 0 auto;
-  position: relative;
-  z-index: 100;
-  font-size: 18px;
-  text-align: right;
-}
-h1 {
-  font-size: 26px;
-  line-height: 26px;
-  color: #000;
-  text-shadow: none;
   margin: 0;
-  text-align: left;
+  background-color: #f5f5f5;
 }
-a, a:hover, a:focus {
-  color: transparent;
-  background: transparent;
+
+.room {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
-.link {
-  color: teal;
+
+.background {
+  width: 100%;
+  height: auto;
+  display: block;
 }
-.link:hover, .link:focus {
-  background-color: teal;
-  color: white;
+
+.object {
+  position: absolute;
+  z-index: 5;
+}
+
+.hotspot {
+  position: absolute;
+  background: rgba(0, 255, 255, 0.2);
+  border: 1px dashed teal;
+  padding: 4px 6px;
+  color: black;
+  text-decoration: none;
+  font-family: monospace;
+  font-size: 14px;
+  z-index: 10;
 }
