@@ -63,3 +63,35 @@ html, body {
   top: 5%;
   left: 72%;
 }
+.object-container {
+  position: absolute;
+  display: inline-block;
+}
+
+.object {
+  position: absolute;
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+.object-container .label {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2px 6px;
+  font-size: 12px;
+  font-family: monospace;
+  border: 1px dashed teal;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.object-container:hover .label {
+  opacity: 1;
+}
+
+.object-container:hover .object {
+  transform: scale(1.05) rotate(-1deg);
+}
