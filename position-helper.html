@@ -2,106 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Position Helper</title>
   <style>
     body {
       margin: 0;
-      font-family: monospace;
-      background: #f0f0f0;
+      background-color: white;
     }
-
-    .container {
+    .background {
       position: relative;
-      width: 1000px;
-      height: 750px;
-      margin: 2rem auto;
-      background-image: url("img/vangogh-room.jpg");
-      background-size: cover;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("img/arka.png");
+      background-repeat: no-repeat;
       background-position: center;
-      border: 2px solid #666;
+      background-size: contain;
     }
-
-    .draggable {
+    .object {
       position: absolute;
-      resize: both;
-      overflow: hidden;
-      border: 2px dashed rgba(0, 0, 0, 0.2);
-      padding: 2px;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
     }
-
-    .draggable img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      pointer-events: none;
+    .controls {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      border: 1px solid #ccc;
+      z-index: 9999;
+      font-family: monospace;
     }
-
-    .info {
-      text-align: center;
-      font-size: 1rem;
-      margin-bottom: 10px;
-    }
-
   </style>
 </head>
 <body>
-
-  <div class="info" id="coords">top: …%; left: …%</div>
-
-  <div class="container" id="canvas">
-    <div class="draggable" id="pc" style="top: 35%; left: 40%; width: 120px; height: 100px;">
-      <img src="img/pc.png" alt="PC">
-    </div>
-
-    <div class="draggable" id="pencere" style="top: 10%; left: 10%; width: 100px; height: 150px;">
-      <img src="img/pencere.gif" alt="Pencere">
-    </div>
+  <div class="controls">
+    <div>Top: <span id="top-value"></span>%</div>
+    <div>Left: <span id="left-value"></span>%</div>
+    <div>Width: <input type="range" min="1" max="50" value="10" id="width-range" /></div>
   </div>
-
+  <div class="background" id="background">
+    <img src="img/pc.png" id="draggable" class="object" style="top: 50%; left: 50%; width: 10%;" />
+  </div>
   <script>
-    function makeDraggable(el) {
-      const container = document.getElementById("canvas");
-      const coords = document.getElementById("coords");
+    const draggable = document.getElementById("draggable");
+    const background = document.getElementById("background");
+    const topValue = document.getElementById("top-value");
+    const leftValue = document.getElementById("left-value");
+    const widthRange = document.getElementById("width-range");
 
-      el.addEventListener("mousedown", function(e) {
-        if (e.target.tagName === "IMG") e.preventDefault();
+    let isDragging = false;
 
-        let shiftX = e.clientX - el.getBoundingClientRect().left;
-        let shiftY = e.clientY - el.getBoundingClientRect().top;
+    draggable.addEventListener("mousedown", (e) => {
+      isDragging = true;
+    });
 
-        function moveAt(pageX, pageY) {
-          let x = pageX - container.getBoundingClientRect().left - shiftX;
-          let y = pageY - container.getBoundingClientRect().top - shiftY;
+    window.addEventListener("mouseup", () => {
+      isDragging = false;
+    });
 
-          x = Math.max(0, Math.min(container.clientWidth - el.offsetWidth, x));
-          y = Math.max(0, Math.min(container.clientHeight - el.offsetHeight, y));
+    window.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
 
-          el.style.left = x + "px";
-          el.style.top = y + "px";
+      const rect = background.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const leftPercent = (x / rect.width) * 100;
+      const topPercent = (y / rect.height) * 100;
 
-          let leftPct = ((x / container.clientWidth) * 100).toFixed(1);
-          let topPct = ((y / container.clientHeight) * 100).toFixed(1);
-          coords.textContent = `top: ${topPct}%; left: ${leftPct}%;`;
-        }
+      draggable.style.left = `${leftPercent}%`;
+      draggable.style.top = `${topPercent}%`;
+      topValue.textContent = topPercent.toFixed(1);
+      leftValue.textContent = leftPercent.toFixed(1);
+    });
 
-        function onMouseMove(e) {
-          moveAt(e.pageX, e.pageY);
-        }
-
-        document.addEventListener("mousemove", onMouseMove);
-
-        document.addEventListener("mouseup", () => {
-          document.removeEventListener("mousemove", onMouseMove);
-        }, { once: true });
-      });
-
-      el.ondragstart = () => false;
-    }
-
-    makeDraggable(document.getElementById("pc"));
-    makeDraggable(document.getElementById("pencere"));
+    widthRange.addEventListener("input", () => {
+      draggable.style.width = `${widthRange.value}%`;
+    });
   </script>
-
 </body>
 </html>
