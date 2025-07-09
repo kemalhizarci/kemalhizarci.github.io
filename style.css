@@ -3,24 +3,18 @@ body {
   padding: 0;
   background-color: #f3f3f3;
   font-family: monospace;
+  overflow: hidden; /* scroll'u engeller */
 }
 
 .background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100vw;
+  max-height: 100vh;
+  width: auto;
   height: auto;
   z-index: 0;
-}
-
-.object {
-  position: absolute;
-  z-index: 10;
-  padding: 4px 8px;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px dashed teal;
-  font-size: 14px;
-  color: teal;
-  text-decoration: none;
+  object-fit: contain;
 }
