@@ -2,76 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Position Helper - Van Gogh</title>
+  <title>Position Helper</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background: #eee;
+      background: #f0f0f0;
+      font-family: monospace;
+      text-align: center;
     }
+
     .container {
       position: relative;
       width: 1000px;
-      margin: 0 auto;
-      background-image: url("img/vangogh-room.jpg");
+      margin: 2rem auto;
+      background-image: url("img/vangogh-room.jpg"); /* Arka plan resmini buraya koy */
       background-size: cover;
-      aspect-ratio: 4/3;
-      border: 2px solid #ccc;
+      background-position: center;
+      aspect-ratio: 4 / 3; /* 1000x750 gibi */
+      border: 2px solid #aaa;
     }
+
     .draggable {
       position: absolute;
-      cursor: move;
       width: 100px;
+      cursor: move;
     }
-    .coords {
-      font-family: monospace;
-      margin: 1em auto;
-      text-align: center;
+
+    .info {
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
 
-<div class="container" id="room">
-  <img src="img/pencere.gif" class="draggable" id="obj" alt="object">
-</div>
-<div class="coords" id="coords">Click & drag to move the object</div>
+  <h1>Position Helper</h1>
+  <p>Sürükle ve alt kısımdan koordinatları kopyala.</p>
 
-<script>
-  const obj = document.getElementById('obj');
-  const container = document.getElementById('room');
-  const coords = document.getElementById('coords');
+  <div class="container" id="canvas">
+    <img src="img/pencere.gif" class="draggable" id="obj" alt="Pencere">
+  </div>
 
-  let offsetX, offsetY;
+  <div class="info" id="coords">top: 0%; left: 0%;</div>
 
-  obj.onmousedown = function(e) {
-    e.preventDefault();
-    offsetX = e.clientX - obj.offsetLeft;
-    offsetY = e.clientY - obj.offsetTop;
+  <script>
+    const obj = document.getElementById("obj");
+    const container = document.getElementById("canvas");
+    const coords = document.getElementById("coords");
 
-    document.onmousemove = function(e) {
-      let x = e.clientX - offsetX;
-      let y = e.clientY - offsetY;
+    let offsetX, offsetY;
 
-      // Constrain inside container
-      x = Math.max(0, Math.min(container.clientWidth - obj.clientWidth, x));
-      y = Math.max(0, Math.min(container.clientHeight - obj.clientHeight, y));
+    obj.addEventListener("mousedown", function(e) {
+      e.preventDefault();
+      offsetX = e.clientX - obj.offsetLeft;
+      offsetY = e.clientY - obj.offsetTop;
 
-      obj.style.left = x + 'px';
-      obj.style.top = y + 'px';
+      function onMouseMove(e) {
+        let x = e.clientX - offsetX;
+        let y = e.clientY - offsetY;
 
-      // Percentage values
-      let leftPercent = ((x / container.clientWidth) * 100).toFixed(1);
-      let topPercent = ((y / container.clientHeight) * 100).toFixed(1);
-      coords.textContent = `top: ${topPercent}%; left: ${leftPercent}%;`;
-    }
+        // container sınırları içinde tut
+        x = Math.max(0, Math.min(container.clientWidth - obj.clientWidth, x));
+        y = Math.max(0, Math.min(container.clientHeight - obj.clientHeight, y));
 
-    document.onmouseup = function() {
-      document.onmousemove = null;
-      document.onmouseup = null;
-    }
-  };
-</script>
+        obj.style.left = x + "px";
+        obj.style.top = y + "px";
+
+        // Yüzdelik değerler
+        let leftPct = ((x / container.clientWidth) * 100).toFixed(1);
+        let topPct = ((y / container.clientHeight) * 100).toFixed(1);
+        coords.textContent = `top: ${topPct}%; left: ${leftPct}%;`;
+      }
+
+      function onMouseUp() {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+      }
+
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
+    });
+  </script>
 
 </body>
 </html>
