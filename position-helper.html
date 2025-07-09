@@ -2,63 +2,76 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Position Helper</title>
+  <title>Position Helper - Van Gogh</title>
   <style>
-    html, body {
+    body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
-      height: 100vh;
-      background: #f5f5f5 url("img/vangogh-room.jpg") no-repeat center center;
-      background-size: contain;
-      font-family: monospace;
+      background: #eee;
     }
-
-    #object {
+    .container {
+      position: relative;
+      width: 1000px;
+      margin: 0 auto;
+      background-image: url("img/vangogh-room.jpg");
+      background-size: cover;
+      aspect-ratio: 4/3;
+      border: 2px solid #ccc;
+    }
+    .draggable {
       position: absolute;
-      width: 10%;
       cursor: move;
+      width: 100px;
     }
-
-    #coords {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      background: white;
-      padding: 8px;
-      font-size: 14px;
-      border-top: 1px solid #ccc;
-      width: 100%;
+    .coords {
+      font-family: monospace;
+      margin: 1em auto;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <img id="object" src="img/pc.png" alt="object" />
 
-  <div id="coords">top: 50%; left: 50%; width: 10%;</div>
+<div class="container" id="room">
+  <img src="img/pencere.gif" class="draggable" id="obj" alt="object">
+</div>
+<div class="coords" id="coords">Click & drag to move the object</div>
 
-  <script>
-    const object = document.getElementById("object");
-    const coords = document.getElementById("coords");
+<script>
+  const obj = document.getElementById('obj');
+  const container = document.getElementById('room');
+  const coords = document.getElementById('coords');
 
-    let isDragging = false;
+  let offsetX, offsetY;
 
-    object.addEventListener("mousedown", () => isDragging = true);
-    document.addEventListener("mouseup", () => isDragging = false);
+  obj.onmousedown = function(e) {
+    e.preventDefault();
+    offsetX = e.clientX - obj.offsetLeft;
+    offsetY = e.clientY - obj.offsetTop;
 
-    document.addEventListener("mousemove", (e) => {
-      if (!isDragging) return;
+    document.onmousemove = function(e) {
+      let x = e.clientX - offsetX;
+      let y = e.clientY - offsetY;
 
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-      const left = (e.clientX / vw) * 100;
-      const top = (e.clientY / vh) * 100;
+      // Constrain inside container
+      x = Math.max(0, Math.min(container.clientWidth - obj.clientWidth, x));
+      y = Math.max(0, Math.min(container.clientHeight - obj.clientHeight, y));
 
-      object.style.left = `${left}%`;
-      object.style.top = `${top}%`;
+      obj.style.left = x + 'px';
+      obj.style.top = y + 'px';
 
-      coords.textContent = `top: ${top.toFixed(1)}%; left: ${left.toFixed(1)}%; width: ${object.style.width};`;
-    });
-  </script>
+      // Percentage values
+      let leftPercent = ((x / container.clientWidth) * 100).toFixed(1);
+      let topPercent = ((y / container.clientHeight) * 100).toFixed(1);
+      coords.textContent = `top: ${topPercent}%; left: ${leftPercent}%;`;
+    }
+
+    document.onmouseup = function() {
+      document.onmousemove = null;
+      document.onmouseup = null;
+    }
+  };
+</script>
+
 </body>
 </html>
