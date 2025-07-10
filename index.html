@@ -8,6 +8,7 @@
     body {
       margin: 0;
       background-color: white;
+      font-family: monospace;
     }
 
     .room {
@@ -40,7 +41,6 @@
       color: white;
       background: rgba(0, 0, 0, 0.6);
       padding: 4px 8px;
-      font-family: monospace;
       font-size: 14px;
       opacity: 0;
       transition: opacity 0.3s;
@@ -52,80 +52,81 @@
       opacity: 1;
     }
 
-    /* Bilgisayar */
-    .pc { top: 23%; left: 18%; width: 10%; }
-
-    /* Pencere */
-    .pencere { top: 0%; left: 25%; width: 16%; }
-
-    /* Mobilya */
-    .mobilya { top: 36.5%; left: 2.7%; width: 16%; }
-
-    /* Sanat */
-    .sanat { top: 9.5%; left: 43.3%; width: 11.5%; }
-
-    /* CV */
-    .cv { top: 4.9%; left: 18.1%; width: 6%; }
-
-    /* Cekmece (Blog) */
-    .cekmece { top: 43%; left: 16%; width: 14%; }
-
-    /* Placeholderlar - Görseller sonra eklenecek */
-    .contact, .proje, .icmimarlik, .karikatur, .foto {
-      width: 8%;
-      top: 50%;
-      left: 50%;
+    .content-box {
+      max-width: 1024px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #f4f4f4;
+      border: 1px solid #ccc;
+      display: none;
     }
+
+    .content-box.active {
+      display: block;
+    }
+
+    .pc { top: 23%; left: 18%; width: 10%; }
+    .pencere { top: 0%; left: 25%; width: 16%; }
+    .mobilya { top: 36.5%; left: 2.7%; width: 16%; }
+    .sanat { top: 9.5%; left: 43.3%; width: 11.5%; }
+    .cv { top: 4.9%; left: 18.1%; width: 6%; }
+    .cekmece { top: 43%; left: 16%; width: 14%; }
   </style>
 </head>
 <body>
   <div class="room">
-    <a class="object pc" href="info.html">
+    <a class="object pc" onclick="showContent('info')">
       <img src="img/pc.png" style="width: 100%;" />
       <span>Info</span>
     </a>
-    <a class="object pencere" href="links.html">
+    <a class="object pencere" onclick="showContent('links')">
       <img src="img/pencere.png" style="width: 100%;" />
       <span>Links</span>
     </a>
-    <a class="object mobilya" href="furniture.html">
+    <a class="object mobilya" onclick="showContent('furniture')">
       <img src="img/mobilya.png" style="width: 100%;" />
       <span>Furniture</span>
     </a>
-    <a class="object sanat" href="sanat.html">
+    <a class="object sanat" onclick="showContent('sanat')">
       <img src="img/sanat.png" style="width: 100%;" />
       <span>Sanat</span>
     </a>
-    <a class="object cv" href="cv.html">
+    <a class="object cv" onclick="showContent('cv')">
       <img src="img/cv.png" style="width: 100%;" />
       <span>CV</span>
     </a>
-    <a class="object cekmece" href="blog.html">
+    <a class="object cekmece" onclick="showContent('blog')">
       <img src="img/cekmece.png" style="width: 100%;" />
       <span>Blog</span>
     </a>
-
-    <!-- Yeni eklenecek yer tutucular -->
-    <a class="object contact" href="contact.html">
-      <img src="img/contact.png" style="width: 100%;" />
-      <span>Contact</span>
-    </a>
-    <a class="object proje" href="proje.html">
-      <img src="img/proje.png" style="width: 100%;" />
-      <span>Proje</span>
-    </a>
-    <a class="object icmimarlik" href="icmimarlik.html">
-      <img src="img/icmimarlik.png" style="width: 100%;" />
-      <span>İç Mimarlık</span>
-    </a>
-    <a class="object karikatur" href="karikatur.html">
-      <img src="img/karikatur.png" style="width: 100%;" />
-      <span>Karikatür</span>
-    </a>
-    <a class="object foto" href="foto.html">
-      <img src="img/foto.png" style="width: 100%;" />
-      <span>Fotoğraf</span>
-    </a>
   </div>
+
+  <div id="info" class="content-box">
+    <p>This is the info section. Here you can write about yourself, your work, or anything you want to share.</p>
+  </div>
+  <div id="links" class="content-box">
+    <p>This is the links section. You can place your social media or references here.</p>
+  </div>
+  <div id="furniture" class="content-box">
+    <p>This is the furniture section. Describe the inspiration behind the virtual room.</p>
+  </div>
+  <div id="sanat" class="content-box">
+    <p>This is the sanat section. Your artwork and exhibitions can be mentioned here.</p>
+  </div>
+  <div id="cv" class="content-box">
+    <p>This is the CV section. You can embed your resume or highlight education/experience here.</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/3BC3gIbr9TU" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <div id="blog" class="content-box">
+    <p>This is the blog section. Blog posts, news or notes can be shown here.</p>
+  </div>
+
+  <script>
+    function showContent(id) {
+      const boxes = document.querySelectorAll('.content-box');
+      boxes.forEach(box => box.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
 </body>
 </html>
