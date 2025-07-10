@@ -2,31 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Van Gogh Room</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      background-color: white;
+    }
+
+    .room {
+      position: relative;
+      width: 100vw;
+      max-width: 1024px;
+      margin: 0 auto;
+      background: url('img/arka.png') no-repeat center center;
+      background-size: contain;
+      aspect-ratio: 4 / 3;
+    }
+
+    .object {
+      position: absolute;
+      transform: scale(1);
+      transition: transform 0.2s ease;
+    }
+
+    .object:hover {
+      transform: scale(1.05);
+    }
+
+    .object span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 4px 8px;
+      font-family: monospace;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .object:hover span {
+      opacity: 1;
+    }
+
+    /* Bilgisayar */
+    .pc {
+      top: 28.1%;
+      left: 32.3%;
+      width: 10.8%;
+    }
+
+    /* Pencere */
+    .pencere {
+      top: 0%;
+      left: 24.6%;
+      width: 14.5%;
+    }
+  </style>
 </head>
 <body>
   <div class="room">
-    <img class="background" src="img/arka.png" alt="Van Gogh Room Background" />
-
-    <!-- Nesneler -->
-    <img class="object pc" src="img/pc.png" alt="Computer" />
-    <div class="object-container">
-  <img 
-    src="img/pc.png" 
-    class="object" 
-    id="pc" 
-    style="top: 31.5%; left: 32.7%; width: 12%;" 
-    alt="retro computer" 
-  />
-  <div class="label">Info</div>
-</div>
-
-    <img class="object pencere" src="img/pencere.png" alt="Window" />
-    <img class="object mobilya" src="img/mobilya.png" alt="Furniture" />
-    <img class="object resim" src="img/resim.png" alt="Painting" />
-    <img class="object sanat" src="img/sanat.png" alt="Art" />
+    <a class="object pc" href="info.html">
+      <img src="img/pc.png" style="width: 100%;" />
+      <span>Info</span>
+    </a>
+    <a class="object pencere" href="links.html">
+      <img src="img/pencere.png" style="width: 100%;" />
+      <span>Links</span>
+    </a>
   </div>
 </body>
 </html>
