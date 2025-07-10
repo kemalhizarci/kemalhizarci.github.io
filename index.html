@@ -22,12 +22,14 @@
 
     .object {
       position: absolute;
-      transform: scale(1);
-      transition: transform 0.2s ease;
+      transform: rotate(0deg);
+      transition: transform 0.3s ease, filter 0.3s ease;
+      display: block;
     }
 
     .object:hover {
-      transform: scale(1.05);
+      transform: rotate(2deg) scale(1.02);
+      z-index: 10;
     }
 
     .object span {
@@ -43,6 +45,7 @@
       opacity: 0;
       transition: opacity 0.3s;
       pointer-events: none;
+      white-space: nowrap;
     }
 
     .object:hover span {
@@ -83,6 +86,13 @@
       left: 43.3%;
       width: 11.5%;
     }
+
+    /* CV (geçici konum) */
+    .cv {
+      top: 50%;
+      left: 50%;
+      width: 10%;
+    }
   </style>
 </head>
 <body>
@@ -106,6 +116,10 @@
     <a class="object sanat" href="sanat.html">
       <img src="img/sanat.png" style="width: 100%;" />
       <span>Sanat</span>
+    </a>
+    <a class="object cv" href="cv.html">
+      <img src="img/cv.png" style="width: 100%;" />
+      <span>CV</span>
     </a>
   </div>
 </body>
