@@ -53,13 +53,13 @@
     }
 
     /* Nesne konumları */
-    .pc     { top: 23%; left: 18%; width: 10%; }
-    .pencere{ top: 0%;  left: 25%; width: 16%; }
-    .mobilya{ top: 36.5%; left: 2.7%; width: 16%; }
-    .resim  { top: 0%;  left: 62%; width: 22.5%; }
-    .sanat  { top: 9.5%; left: 43.3%; width: 11.5%; }
-    .cv     { top: 4.9%; left: 18.1%; width: 6%; }
-    .cekmece{ top: 39%; left: 24.3%; width: 6%; }
+    .pc     { top: 23%;   left: 18%;   width: 10%; }
+    .pencere{ top: 0%;    left: 25%;   width: 16%; }
+    .mobilya{ top: 36.5%; left: 2.7%;  width: 16%; }
+    .resim  { top: 0%;    left: 62%;   width: 22.5%; }
+    .sanat  { top: 9.5%;  left: 43.3%; width: 11.5%; }
+    .cv     { top: 4.9%;  left: 18.1%; width: 6%; }
+    .cekmece{ top: 39%;   left: 24.3%; width: 6%; }
 
     /* İçerik alanı */
     .content {
@@ -79,49 +79,85 @@
 </head>
 <body>
   <div class="room">
-    <a class="object pc" href="#info"><img src="img/pc.png" style="width: 100%;" /><span>Info</span></a>
-    <a class="object pencere" href="#links"><img src="img/pencere.png" style="width: 100%;" /><span>Links</span></a>
-    <a class="object mobilya" href="#furniture"><img src="img/mobilya.png" style="width: 100%;" /><span>Furniture</span></a>
-    <a class="object resim" href="#art"><img src="img/resim.png" style="width: 100%;" /><span>Artwork</span></a>
-    <a class="object sanat" href="#sanat"><img src="img/sanat.png" style="width: 100%;" /><span>Sanat</span></a>
-    <a class="object cv" href="#cv"><img src="img/cv.png" style="width: 100%;" /><span>CV</span></a>
-    <a class="object cekmece" href="blog.html"><img src="img/cekmece.png" style="width: 100%;" /><span>Blog</span>
-</a>
-
+    <a class="object pc" href="#info">
+      <img src="img/pc.png" style="width: 100%;" />
+      <span>Info</span>
+    </a>
+    <a class="object pencere" href="#links">
+      <img src="img/pencere.png" style="width: 100%;" />
+      <span>Links</span>
+    </a>
+    <a class="object mobilya" href="#furniture">
+      <img src="img/mobilya.png" style="width: 100%;" />
+      <span>Furniture</span>
+    </a>
+    <a class="object resim" href="#art">
+      <img src="img/resim.png" style="width: 100%;" />
+      <span>Artwork</span>
+    </a>
+    <a class="object sanat" href="#sanat">
+      <img src="img/sanat.png" style="width: 100%;" />
+      <span>Sanat</span>
+    </a>
+    <a class="object cv" href="#cv">
+      <img src="img/cv.png" style="width: 100%;" />
+      <span>CV</span>
+    </a>
+    <a class="object cekmece" href="blog.html">
+      <img src="img/cekmece.png" style="width: 100%;" />
+      <span>Blog</span>
+    </a>
   </div>
 
   <!-- İçerik Bölümleri -->
-  <div class="content" id="info">Info: Bu sayfa Kemal Hızarcı tarafından Temmuz 2025'te hazırlanmıştır.
-  </h2>
+  <div class="content" id="info">
+    <h2>Info</h2>
+    <p>Bu sayfa Kemal Hızarcı tarafından Temmuz 2025'te hazırlanmıştır.</p>
     <p>Bu sayfayı hazırlama sürecinde bana ilham olan neocities sitesine ve orada yer alan ribo.zone çoklu sayfasına,</p>
-    <p>Arles'teki Yatak Odası (Slaapkamer te Arles) tablosuyla bana ilham veren Vincent van Gogh'a ve değerli ağabeyi Theo'ya</p>
-    <p>selam olsun…</p>>
+    <p>Arles'teki Yatak Odası (Slaapkamer te Arles) tablosuyla bana ilham veren Vincent van Gogh'a ve değerli ağabeyi Theo'ya selam olsun…</p>
   </div>
-  <div class="content" id="links">Pencere: Linklerini burada görebilirsin.</div>
-  <div class="content" id="furniture">Mobilya: Mobilyalar hakkında notlar burada.</div>
-  <div class="content" id="art">Resim: Duvar resimlerine dair açıklamalar.</div>
-  <div class="content" id="sanat">Sanat: Sanatsal düşünceler veya projeler burada olabilir.</div>
+
+  <div class="content" id="links">
+    <h2>Links</h2>
+    <p>Pencere: Linklerini burada görebilirsin.</p>
+  </div>
+
+  <div class="content" id="furniture">
+    <h2>Furniture</h2>
+    <p>Mobilyalar hakkında notlar burada.</p>
+  </div>
+
+  <div class="content" id="art">
+    <h2>Artwork</h2>
+    <p>Duvar resimlerine dair açıklamalar.</p>
+  </div>
+
+  <div class="content" id="sanat">
+    <h2>Sanat</h2>
+    <p>Sanatsal düşünceler veya projeler burada olabilir.</p>
+  </div>
+
   <div class="content" id="cv">
     <h2>CV</h2>
     <p>Ad: Kemal Hızarcı</p>
     <p>İç Mimarlık Öğrencisi – MSGSÜ 2022 - devam ediyor</p>
-    <p>Portfolyo, sergi katılımları ve daha fazlası burada yer alacak.</p>>
-  <div style="margin-top: 1rem;">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/3BC3gIbr9TU"
-    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
-    encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-  </div>
-</div>
-
+    <p>Portfolyo, sergi katılımları ve daha fazlası burada yer alacak.</p>
+    <div style="margin-top: 1rem;">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/3BC3gIbr9TU" title="YouTube video player"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
   </div>
 
-  <!-- JavaScript -->
   <script>
     const links = document.querySelectorAll('.object');
     const contents = document.querySelectorAll('.content');
 
     links.forEach(link => {
-      link.addEventListener('click', function(e) {
+      const href = link.getAttribute('href');
+      if (!href.startsWith("#")) return; // blog.html gibi harici linklere dokunma
+
+      link.addEventListener('click', function (e) {
         e.preventDefault();
         const target = this.getAttribute('href').substring(1);
 
